@@ -4,7 +4,7 @@ class Constants {
 
     interface URL_CONSTANTS{
         companion object{
-            const val TMDBAPI_URL = "https://api.themoviedb.org/3"
+            const val TMDBAPI_URL = "https://api.themoviedb.org/3/"
         }
     }
 

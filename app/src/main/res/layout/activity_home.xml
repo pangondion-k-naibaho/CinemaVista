@@ -6,4 +6,39 @@
     android:layout_height="match_parent"
     tools:context=".view.activity.HomeActivity.HomeActivity">
 
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vpFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bnvFragment"/>
+
+    <ProgressBar
+        android:id="@+id/pbHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:indeterminateTint="@color/dark_eclipse"
+        android:visibility="gone"
+        tools:visibility="visible"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bnvFragment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/bottom_menu_home"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        app:itemPaddingBottom="5dp"
+        app:itemIconSize="30dp"
+        android:background="@color/seared_grey"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

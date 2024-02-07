@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">CinemaVista</string>
+    <string name="menu_nowplaying_title">Now Playing</string>
+    <string name="menu_popular_title">Popular</string>
+    <string name="menu_toprated_title">Top Rated</string>
+    <string name="menu_upcoming_title">Upcoming</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tv_dummyTextFragment">This is Fragment %s</string>
 </resources>

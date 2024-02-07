@@ -32,6 +32,7 @@ class LoadScreenActivity : Activity() {
                 HomeActivity.newIntent(this@LoadScreenActivity)
             )
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            finish()
         },4000)
     }
 }
