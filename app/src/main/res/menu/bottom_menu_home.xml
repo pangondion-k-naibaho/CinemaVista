@@ -14,6 +14,12 @@
         android:checkable="true"/>
 
     <item
+        android:id="@+id/menu_discover"
+        android:title="@string/menu_discover_title"
+        android:icon="@drawable/ic_search_unselected"
+        android:checkable="true"/>
+
+    <item
         android:id="@+id/menu_toprated"
         android:title="@string/menu_toprated_title"
         android:icon="@drawable/ic_toprated_unselected"

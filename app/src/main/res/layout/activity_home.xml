@@ -39,6 +39,7 @@
         app:itemTextColor="@color/white"
         app:itemPaddingBottom="5dp"
         app:itemIconSize="30dp"
+        android:textAlignment="gravity"
         android:background="@color/seared_grey"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

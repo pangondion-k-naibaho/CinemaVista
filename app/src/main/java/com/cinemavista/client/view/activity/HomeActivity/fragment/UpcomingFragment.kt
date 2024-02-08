@@ -1,15 +1,20 @@
 package com.cinemavista.client.view.activity.HomeActivity.fragment
 
+import android.content.ClipData.Item
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import com.cinemavista.client.R
 import com.cinemavista.client.databinding.FragmentUpcomingBinding
+import com.cinemavista.client.model.data_class.response.MovieInformation
 import com.cinemavista.client.view.activity.HomeActivity.HomeCommunicator
+import com.cinemavista.client.view.adapter.ItemMovieAdapter
 import com.cinemavista.client.viewmodel.HomeViewModel
 
 class UpcomingFragment : Fragment() {
@@ -46,7 +51,6 @@ class UpcomingFragment : Fragment() {
     }
 
     private fun initView(){
-        binding.tvDummy.text = String.format(getString(R.string.tv_dummyTextFragment), input)
         homeViewModel.getUpcomingMovies(page = 1)
 
         homeViewModel.isLoading.observe(this@UpcomingFragment.requireActivity(), {
@@ -59,6 +63,23 @@ class UpcomingFragment : Fragment() {
 
         homeViewModel.upcomingMovies.observe(this@UpcomingFragment.requireActivity(), {listUpcomingMovies->
             Log.d(TAG, "List upcoming movies: ${listUpcomingMovies}")
+
+            binding.rvListMovie.apply {
+
+                val movieAdapter = ItemMovieAdapter(
+                    listUpcomingMovies.results!!.toMutableList(),
+                    object: ItemMovieAdapter.ItemListener{
+                        override fun onItemClicked(item: MovieInformation) {
+                            Toast.makeText(this@UpcomingFragment.requireActivity(), "Movie clicked : ${item.title}", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                )
+
+                val rvLayoutManager = GridLayoutManager(this@UpcomingFragment.requireActivity(), 2)
+
+                adapter = movieAdapter
+                layoutManager = rvLayoutManager
+            }
         })
     }
 

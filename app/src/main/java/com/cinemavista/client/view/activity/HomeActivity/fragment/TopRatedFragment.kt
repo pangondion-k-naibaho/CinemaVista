@@ -6,10 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import com.cinemavista.client.R
 import com.cinemavista.client.databinding.FragmentTopRatedBinding
+import com.cinemavista.client.model.data_class.response.MovieInformation
 import com.cinemavista.client.view.activity.HomeActivity.HomeCommunicator
+import com.cinemavista.client.view.adapter.ItemMovieAdapter
 import com.cinemavista.client.viewmodel.HomeViewModel
 
 class TopRatedFragment : Fragment() {
@@ -45,7 +49,6 @@ class TopRatedFragment : Fragment() {
     }
 
     private fun initView(){
-        binding.tvDummy.text = String.format(getString(R.string.tv_dummyTextFragment), input)
         homeViewModel.getTopRatedMovies(page = 1)
 
         homeViewModel.isLoading.observe(this@TopRatedFragment.requireActivity(), {
@@ -58,6 +61,24 @@ class TopRatedFragment : Fragment() {
 
         homeViewModel.topRatedMovies.observe(this@TopRatedFragment.requireActivity(), {listTopRatedMovie->
             Log.d(TAG, "List Top Rated movies: ${listTopRatedMovie}")
+
+            binding.rvListMovie.apply {
+
+                val movieAdapter = ItemMovieAdapter(
+                    listTopRatedMovie.results!!.toMutableList(),
+                    object: ItemMovieAdapter.ItemListener{
+                        override fun onItemClicked(item: MovieInformation) {
+                            Toast.makeText(this@TopRatedFragment.requireActivity(), "Movie clicked: ${item.title}", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                )
+
+                val rvLayoutManager = GridLayoutManager(this@TopRatedFragment.requireActivity(), 2)
+
+                adapter = movieAdapter
+                layoutManager = rvLayoutManager
+            }
+
         })
     }
 

@@ -11,6 +11,7 @@ import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import androidx.viewpager2.widget.ViewPager2.SCROLL_STATE_IDLE
 import com.cinemavista.client.R
 import com.cinemavista.client.databinding.ActivityHomeBinding
+import com.cinemavista.client.view.activity.HomeActivity.fragment.DiscoverMovieFragment
 import com.cinemavista.client.view.activity.HomeActivity.fragment.NowPlayingFragment
 import com.cinemavista.client.view.activity.HomeActivity.fragment.PopularFragment
 import com.cinemavista.client.view.activity.HomeActivity.fragment.TopRatedFragment
@@ -47,10 +48,11 @@ class HomeActivity : AppCompatActivity(), HomeCommunicator {
 
         val nowPlayingFragment = NowPlayingFragment.newInstance("Now Playing")
         val popularFragment = PopularFragment.newInstance("Popular")
+        val discoverMovieFragment = DiscoverMovieFragment.newInstance("Discover Movie")
         val topRatedFragment = TopRatedFragment.newInstance("TopRated")
         val upcomingFragment = UpcomingFragment.newInstance("Upcoming")
 
-        val listFragment = listOf(nowPlayingFragment, popularFragment, topRatedFragment, upcomingFragment)
+        val listFragment = listOf(nowPlayingFragment, popularFragment, discoverMovieFragment, topRatedFragment, upcomingFragment)
 
         adapterFragmentHome.fragmentList.addAll(listFragment)
 
@@ -73,6 +75,9 @@ class HomeActivity : AppCompatActivity(), HomeCommunicator {
                                 binding.bnvFragment.selectedItemId = R.id.menu_popular
                             }
                             2 ->{
+                                binding.bnvFragment.selectedItemId = R.id.menu_discover
+                            }
+                            3 ->{
                                 binding.bnvFragment.selectedItemId = R.id.menu_toprated
                             }
                             else ->{
@@ -96,11 +101,14 @@ class HomeActivity : AppCompatActivity(), HomeCommunicator {
                         R.id.menu_popular ->{
                             binding.vpFragment.setCurrentItem(1, false)
                         }
-                        R.id.menu_toprated ->{
+                        R.id.menu_discover ->{
                             binding.vpFragment.setCurrentItem(2, false)
                         }
-                        R.id.menu_upcoming ->{
+                        R.id.menu_toprated ->{
                             binding.vpFragment.setCurrentItem(3, false)
+                        }
+                        R.id.menu_upcoming ->{
+                            binding.vpFragment.setCurrentItem(4, false)
                         }
                     }
                     return true

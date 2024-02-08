@@ -6,10 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.GridLayout
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import com.cinemavista.client.R
 import com.cinemavista.client.databinding.FragmentPopularBinding
+import com.cinemavista.client.model.data_class.response.MovieInformation
 import com.cinemavista.client.view.activity.HomeActivity.HomeCommunicator
+import com.cinemavista.client.view.adapter.ItemMovieAdapter
 import com.cinemavista.client.viewmodel.HomeViewModel
 
 class PopularFragment : Fragment() {
@@ -46,7 +51,6 @@ class PopularFragment : Fragment() {
     }
 
     private fun initView(){
-        binding.tvDummy.text = String.format(getString(R.string.tv_dummyTextFragment), input)
         homeViewModel.getPopularMovies(page = 1)
 
         homeViewModel.isLoading.observe(this@PopularFragment.requireActivity(), {
@@ -59,6 +63,23 @@ class PopularFragment : Fragment() {
 
         homeViewModel.popularMovies.observe(this@PopularFragment.requireActivity(), {listPopularMovie->
             Log.d(TAG, "List Popular movies: ${listPopularMovie}")
+
+            binding.rvListMovie.apply {
+
+                val movieAdapter = ItemMovieAdapter(
+                    listPopularMovie.results!!.toMutableList(),
+                    object: ItemMovieAdapter.ItemListener{
+                        override fun onItemClicked(item: MovieInformation) {
+                            Toast.makeText(this@PopularFragment.requireActivity(), "Movie clicked : ${item.title}", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                )
+
+                val rvLayoutManager = GridLayoutManager(this@PopularFragment.requireActivity(), 2)
+
+                adapter = movieAdapter
+                layoutManager = rvLayoutManager
+            }
         })
     }
 

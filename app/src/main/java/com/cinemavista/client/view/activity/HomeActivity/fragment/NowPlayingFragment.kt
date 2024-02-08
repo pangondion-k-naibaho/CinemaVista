@@ -6,10 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import com.cinemavista.client.R
 import com.cinemavista.client.databinding.FragmentNowPlayingBinding
+import com.cinemavista.client.model.data_class.response.MovieInformation
 import com.cinemavista.client.view.activity.HomeActivity.HomeCommunicator
+import com.cinemavista.client.view.adapter.ItemMovieAdapter
 import com.cinemavista.client.viewmodel.HomeViewModel
 
 class NowPlayingFragment : Fragment() {
@@ -46,7 +50,6 @@ class NowPlayingFragment : Fragment() {
     }
 
     private fun initView(){
-        binding.tvDummy.text = String.format(getString(R.string.tv_dummyTextFragment, input))
         homeViewModel.getNowPlayingMovies(page = 1)
 
         homeViewModel.isLoading.observe(this@NowPlayingFragment.requireActivity(), {
@@ -59,6 +62,22 @@ class NowPlayingFragment : Fragment() {
 
         homeViewModel.nowPlayingMovies.observe(this@NowPlayingFragment.requireActivity(), {listNowPlayingMovie->
             Log.d(TAG, "List now playing movies : ${listNowPlayingMovie}")
+            binding.rvListMovie.apply {
+
+                val movieAdapter = ItemMovieAdapter(
+                    listNowPlayingMovie.results!!.toMutableList(),
+                    object: ItemMovieAdapter.ItemListener{
+                        override fun onItemClicked(item: MovieInformation) {
+                            Toast.makeText(this@NowPlayingFragment.requireActivity(), "Movie clicked: ${item.title}", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                )
+
+                val rvLayoutManager = GridLayoutManager(this@NowPlayingFragment.requireActivity(), 2)
+
+                adapter = movieAdapter
+                layoutManager = rvLayoutManager
+            }
         })
     }
     override fun onDestroy() {

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="8dp"
-    tools:context=".view.activity.HomeActivity.fragment.TopRatedFragment">
+    tools:context=".view.activity.HomeActivity.fragment.DiscoverMovieFragment">
 
     <TextView
         android:id="@+id/tvTitle"
@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:fontFamily="@font/oswald_variablefont_wght"
         android:textSize="18sp"
-        android:text="@string/tvTitle_toprated"/>
+        android:text="@string/tvTitle_discover"/>
 
     <View
         android:id="@+id/viewTitle"
@@ -28,14 +28,24 @@
         android:background="@color/dark_eclipse"
         android:layout_marginStart="5dp"/>
 
+    <com.cinemavista.client.view.advanced_ui.DiscoverChipGroupView
+        android:id="@+id/discoverMovieWidget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        android:layout_marginTop="10dp"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvListMovie"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@+id/discoverMovieWidget"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:overScrollMode="never"
         android:layout_marginTop="5dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
