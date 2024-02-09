@@ -13,28 +13,28 @@ interface ApiService {
     @GET("movie/now_playing")
     fun getListMovieNowPlaying(
         @Query("language") language: String?= null,
-        @Query("page") page: Int,
+        @Query("page") page: Int?,
         @Query("region") region: String?= null
     ): Call<MovieCollection>
 
     @GET("movie/popular")
     fun getListMoviePopular(
         @Query("language") language: String?= null,
-        @Query("page") page: Int,
+        @Query("page") page: Int?,
         @Query("region") region: String?= null
     ): Call<MovieCollection>
 
     @GET("movie/top_rated")
     fun getListMovieTopRated(
         @Query("language") language: String?= null,
-        @Query("page") page: Int,
+        @Query("page") page: Int?,
         @Query("region") region: String?= null
     ): Call<MovieCollection>
 
     @GET("movie/upcoming")
     fun getListMovieUpcoming(
         @Query("language") language: String?= null,
-        @Query("page") page: Int,
+        @Query("page") page: Int?,
         @Query("region") region: String?= null
     ): Call<MovieCollection>
 
@@ -47,7 +47,7 @@ interface ApiService {
         @Query("include_adult") includeAdult: Boolean = false,
         @Query("include_video") includeVideo: Boolean = false,
         @Query("language") language: String = "en-US",
-        @Query("page") page: Int,
+        @Query("page") page: Int?,
         @Query("primary_release_year") primaryReleaseYear: Int? = null,
         @Query("primary_release_date.gte") primaryReleaseDateGte: Date?= null,
         @Query("primary_release_date.lte") primaryReleaseDateLte: Date?= null,

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.cinemavista.client.R
 import com.cinemavista.client.databinding.FragmentDiscoverMovieBinding
 import com.cinemavista.client.model.data_class.response.MovieInformation
@@ -24,7 +25,8 @@ class DiscoverMovieFragment : Fragment() {
     private var input: String? = ""
     private lateinit var homeCommunicator: HomeCommunicator
     private val homeViewModel by viewModels<HomeViewModel>()
-    private var currentPage: Int = 1
+    private var currentPage: Int? = null
+    private var currentGenres: String?= null
 
     companion object{
         const val DELIVERED_INPUT = "DELIVERED_INPUT"
@@ -52,7 +54,8 @@ class DiscoverMovieFragment : Fragment() {
     }
 
     private fun initView(){
-        homeViewModel.getDiscoveredMoviesBasedOnGenre(page = currentPage, genres = null)
+        currentPage = 1
+        homeViewModel.getDiscoveredMoviesBasedOnGenre(page = currentPage!!, genres = currentGenres)
 
         homeViewModel.isLoading.observe(this@DiscoverMovieFragment.requireActivity(), {
             if(it) homeCommunicator.onStartLoading() else homeCommunicator.onStopLoading()
@@ -79,6 +82,30 @@ class DiscoverMovieFragment : Fragment() {
 
                 adapter = movieAdapter
                 layoutManager = rvLayoutManager
+
+                addOnScrollListener(object: RecyclerView.OnScrollListener(){
+                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                        super.onScrolled(recyclerView, dx, dy)
+
+                        val visibleItemCount = rvLayoutManager.childCount
+                        val totalItemCount = rvLayoutManager.itemCount
+                        val firstVisibleItemPosition = rvLayoutManager.findFirstVisibleItemPosition()
+
+                        if((visibleItemCount+firstVisibleItemPosition) >= totalItemCount
+                            && firstVisibleItemPosition >= 0
+                            && totalItemCount >= listDiscoveredMovie.results!!.size
+                        ){
+                            currentPage = currentPage?.plus(1)
+                            homeViewModel.getDiscoveredMoviesBasedOnGenreMore(page = currentPage, genres = currentGenres)
+                            homeViewModel.discoveredMovies2.observe(this@DiscoverMovieFragment.requireActivity(), {neoListDiscoveredMovie->
+                                if(!neoListDiscoveredMovie.results.isNullOrEmpty()){
+                                    movieAdapter.addItem(neoListDiscoveredMovie.results!!)
+                                }
+                            })
+                        }
+
+                    }
+                })
             }
         })
 
@@ -92,13 +119,14 @@ class DiscoverMovieFragment : Fragment() {
                 override fun onItemChipGroupClicked() {}
 
                 override fun onButtonDiscoverBasedOnGenresClicked() {
+                    currentPage = 1
                     if(getData().isEmpty()){
 //                        Toast.makeText(this@DiscoverMovieFragment.requireActivity(), "null or empty", Toast.LENGTH_SHORT).show()
-                        homeViewModel.getDiscoveredMoviesBasedOnGenre(page = currentPage, genres = null)
+                        homeViewModel.getDiscoveredMoviesBasedOnGenre(page = currentPage!!, genres = null)
                     }else{
 //                        Toast.makeText(this@DiscoverMovieFragment.requireActivity(), getData().joinToString(","), Toast.LENGTH_SHORT).show()
-                        val retrievedGenres = getData().joinToString("%2C")
-                        homeViewModel.getDiscoveredMoviesBasedOnGenre(page = currentPage, genres = retrievedGenres)
+                        currentGenres = getData().joinToString("%2C")
+                        homeViewModel.getDiscoveredMoviesBasedOnGenre(page = currentPage!!, genres = currentGenres)
                     }
                 }
 

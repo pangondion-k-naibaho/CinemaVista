@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.cinemavista.client.R
 import com.cinemavista.client.databinding.FragmentNowPlayingBinding
 import com.cinemavista.client.model.data_class.response.MovieInformation
@@ -23,6 +24,7 @@ class NowPlayingFragment : Fragment() {
     private var input: String? = ""
     private lateinit var homeCommunicator: HomeCommunicator
     private val homeViewModel by viewModels<HomeViewModel>()
+    private var currentPage: Int?= null
 
     companion object {
         const val DELIVERED_INPUT = "DELIVERED_INPUT"
@@ -50,7 +52,8 @@ class NowPlayingFragment : Fragment() {
     }
 
     private fun initView(){
-        homeViewModel.getNowPlayingMovies(page = 1)
+        currentPage = 1
+        homeViewModel.getNowPlayingMovies(page = currentPage!!)
 
         homeViewModel.isLoading.observe(this@NowPlayingFragment.requireActivity(), {
             if(it) homeCommunicator.onStartLoading() else homeCommunicator.onStopLoading()
@@ -77,6 +80,28 @@ class NowPlayingFragment : Fragment() {
 
                 adapter = movieAdapter
                 layoutManager = rvLayoutManager
+                addOnScrollListener(object: RecyclerView.OnScrollListener(){
+                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                        super.onScrolled(recyclerView, dx, dy)
+
+                        val visibleItemCount = rvLayoutManager.childCount
+                        val totalItemCount = rvLayoutManager.itemCount
+                        val firstVisibleItemPosition = rvLayoutManager.findFirstVisibleItemPosition()
+
+                        if((visibleItemCount+firstVisibleItemPosition) >= totalItemCount
+                            && firstVisibleItemPosition >= 0
+                            && totalItemCount >= listNowPlayingMovie.results!!.size
+                            ){
+                            currentPage = currentPage?.plus(1)
+                            homeViewModel.getNowPlayingMoviesMore(page = currentPage)
+                            homeViewModel.nowPlayingMovies2.observe(this@NowPlayingFragment.requireActivity(),{neoListNowPlayingMovie->
+                                if(!neoListNowPlayingMovie.results.isNullOrEmpty()){
+                                    movieAdapter.addItem(neoListNowPlayingMovie.results!!)
+                                }
+                            })
+                        }
+                    }
+                })
             }
         })
     }
