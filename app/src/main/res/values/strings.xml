@@ -16,4 +16,6 @@
     <string name="tvTitle_upcoming">Upcoming</string>
     <string name="tvTitle_discover">Discover Movie</string>
     <string name="btnTxt_Discover">Discover Based on Genre</string>
+    <string name="btnTxt_popup">Retry</string>
+    <string name="tvPopUpDescription">Oops! Something went wrong.\nPlease try again</string>
 </resources>

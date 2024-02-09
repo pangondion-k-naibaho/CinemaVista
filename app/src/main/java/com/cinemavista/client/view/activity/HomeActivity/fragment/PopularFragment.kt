@@ -14,8 +14,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cinemavista.client.R
 import com.cinemavista.client.databinding.FragmentPopularBinding
 import com.cinemavista.client.model.data_class.response.MovieInformation
+import com.cinemavista.client.view.activity.DetailActivity.DetailActivity
 import com.cinemavista.client.view.activity.HomeActivity.HomeCommunicator
 import com.cinemavista.client.view.adapter.ItemMovieAdapter
+import com.cinemavista.client.view.advanced_ui.PopUpDialogListener
+import com.cinemavista.client.view.advanced_ui.showPopUpDialog
 import com.cinemavista.client.viewmodel.HomeViewModel
 
 class PopularFragment : Fragment() {
@@ -61,7 +64,18 @@ class PopularFragment : Fragment() {
         })
 
         homeViewModel.isFail.observe(this@PopularFragment.requireActivity(), {
-            Log.d(TAG, "isLoadMovieFail: ${it}")
+            if(it){
+                this@PopularFragment.requireActivity().showPopUpDialog(
+                    getString(R.string.tvPopUpDescription),
+                    R.drawable.sadness,
+                    object: PopUpDialogListener {
+                        override fun onClickListener() {
+                            this@PopularFragment.requireActivity().recreate()
+                        }
+                    }
+                )
+            }
+
         })
 
         homeViewModel.popularMovies.observe(this@PopularFragment.requireActivity(), {listPopularMovie->
@@ -73,7 +87,13 @@ class PopularFragment : Fragment() {
                     listPopularMovie.results!!.toMutableList(),
                     object: ItemMovieAdapter.ItemListener{
                         override fun onItemClicked(item: MovieInformation) {
-                            Toast.makeText(this@PopularFragment.requireActivity(), "Movie clicked : ${item.title}", Toast.LENGTH_SHORT).show()
+                            startActivity(
+                                DetailActivity.newIntent(
+                                    this@PopularFragment.requireActivity(),
+                                    item
+                                )
+                            )
+                            this@PopularFragment.requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                         }
                     }
                 )

@@ -13,8 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cinemavista.client.R
 import com.cinemavista.client.databinding.FragmentTopRatedBinding
 import com.cinemavista.client.model.data_class.response.MovieInformation
+import com.cinemavista.client.view.activity.DetailActivity.DetailActivity
 import com.cinemavista.client.view.activity.HomeActivity.HomeCommunicator
 import com.cinemavista.client.view.adapter.ItemMovieAdapter
+import com.cinemavista.client.view.advanced_ui.PopUpDialogListener
+import com.cinemavista.client.view.advanced_ui.showPopUpDialog
 import com.cinemavista.client.viewmodel.HomeViewModel
 
 class TopRatedFragment : Fragment() {
@@ -59,7 +62,17 @@ class TopRatedFragment : Fragment() {
         })
 
         homeViewModel.isFail.observe(this@TopRatedFragment.requireActivity(), {
-            Log.d(TAG, "isLoadMovieFail: ${it}")
+            if(it){
+                this@TopRatedFragment.requireActivity().showPopUpDialog(
+                    getString(R.string.tvPopUpDescription),
+                    R.drawable.sadness,
+                    object: PopUpDialogListener {
+                        override fun onClickListener() {
+                            this@TopRatedFragment.requireActivity().recreate()
+                        }
+                    }
+                )
+            }
         })
 
         homeViewModel.topRatedMovies.observe(this@TopRatedFragment.requireActivity(), {listTopRatedMovie->
@@ -71,7 +84,13 @@ class TopRatedFragment : Fragment() {
                     listTopRatedMovie.results!!.toMutableList(),
                     object: ItemMovieAdapter.ItemListener{
                         override fun onItemClicked(item: MovieInformation) {
-                            Toast.makeText(this@TopRatedFragment.requireActivity(), "Movie clicked: ${item.title}", Toast.LENGTH_SHORT).show()
+                            startActivity(
+                                DetailActivity.newIntent(
+                                    this@TopRatedFragment.requireActivity(),
+                                    item
+                                )
+                            )
+                            this@TopRatedFragment.requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                         }
                     }
                 )

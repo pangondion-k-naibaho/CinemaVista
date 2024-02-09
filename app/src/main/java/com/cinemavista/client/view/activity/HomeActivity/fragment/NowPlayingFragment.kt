@@ -13,8 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cinemavista.client.R
 import com.cinemavista.client.databinding.FragmentNowPlayingBinding
 import com.cinemavista.client.model.data_class.response.MovieInformation
+import com.cinemavista.client.view.activity.DetailActivity.DetailActivity
 import com.cinemavista.client.view.activity.HomeActivity.HomeCommunicator
 import com.cinemavista.client.view.adapter.ItemMovieAdapter
+import com.cinemavista.client.view.advanced_ui.PopUpDialogListener
+import com.cinemavista.client.view.advanced_ui.showPopUpDialog
 import com.cinemavista.client.viewmodel.HomeViewModel
 
 class NowPlayingFragment : Fragment() {
@@ -60,7 +63,17 @@ class NowPlayingFragment : Fragment() {
         })
 
         homeViewModel.isFail.observe(this@NowPlayingFragment.requireActivity(), {
-            Log.d(TAG, "isLoadMovieFail: ${it}")
+            if(it){
+                this@NowPlayingFragment.requireActivity().showPopUpDialog(
+                    getString(R.string.tvPopUpDescription),
+                    R.drawable.sadness,
+                    object: PopUpDialogListener{
+                        override fun onClickListener() {
+                            this@NowPlayingFragment.requireActivity().recreate()
+                        }
+                    }
+                )
+            }
         })
 
         homeViewModel.nowPlayingMovies.observe(this@NowPlayingFragment.requireActivity(), {listNowPlayingMovie->
@@ -71,7 +84,13 @@ class NowPlayingFragment : Fragment() {
                     listNowPlayingMovie.results!!.toMutableList(),
                     object: ItemMovieAdapter.ItemListener{
                         override fun onItemClicked(item: MovieInformation) {
-                            Toast.makeText(this@NowPlayingFragment.requireActivity(), "Movie clicked: ${item.title}", Toast.LENGTH_SHORT).show()
+                            startActivity(
+                                DetailActivity.newIntent(
+                                    this@NowPlayingFragment.requireActivity(),
+                                    item
+                                )
+                            )
+                            this@NowPlayingFragment.requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                         }
                     }
                 )
