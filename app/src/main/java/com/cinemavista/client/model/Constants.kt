@@ -20,6 +20,8 @@ class Constants {
     interface URL{
         companion object{
             const val TMDBIMAGE_URL = "https://image.tmdb.org/t/p/w500"
+            const val YOUTUBE_URL = "https://youtube.com"
+            const val TMDBAVATAR_URL = "https://www.gravatar.com/avatar"
         }
     }
 
@@ -63,6 +65,12 @@ class Constants {
             const val THRILLER = 53
             const val WAR = 10752
             const val WESTERN = 37
+        }
+    }
+
+    interface LANGUAGE{
+        companion object{
+            const val EN_US = "en-US"
         }
     }
 }

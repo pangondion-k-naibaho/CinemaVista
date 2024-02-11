@@ -72,6 +72,7 @@ class DiscoverMovieFragment : Fragment() {
                     object: PopUpDialogListener {
                         override fun onClickListener() {
                             this@DiscoverMovieFragment.requireActivity().recreate()
+                            this@DiscoverMovieFragment.requireActivity().closeOptionsMenu()
                         }
                     }
                 )

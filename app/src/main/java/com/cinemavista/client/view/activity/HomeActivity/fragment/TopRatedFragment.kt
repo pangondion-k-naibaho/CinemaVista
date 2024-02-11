@@ -69,6 +69,7 @@ class TopRatedFragment : Fragment() {
                     object: PopUpDialogListener {
                         override fun onClickListener() {
                             this@TopRatedFragment.requireActivity().recreate()
+                            this@TopRatedFragment.requireActivity().closeOptionsMenu()
                         }
                     }
                 )

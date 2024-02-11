@@ -81,7 +81,9 @@ class HomeViewModel: ViewModel() {
 
     fun getDiscoveredMoviesBasedOnGenreMore(page: Int?, genres: String?){
         _isLoading.value = true
-        val client = ApiConfig.getApiService().getDiscoveredMovie(page = page, withGenres = genres).enqueue(object: retrofit2.Callback<MovieCollection>{
+        val client = ApiConfig.getApiService().getDiscoveredMovie(page = page, withGenres = genres)
+
+        client.enqueue(object: retrofit2.Callback<MovieCollection>{
             override fun onResponse(
                 call: Call<MovieCollection>,
                 response: Response<MovieCollection>

@@ -71,6 +71,7 @@ class UpcomingFragment : Fragment() {
                     object: PopUpDialogListener {
                         override fun onClickListener() {
                             this@UpcomingFragment.requireActivity().recreate()
+                            this@UpcomingFragment.requireActivity().closeOptionsMenu()
                         }
                     }
                 )

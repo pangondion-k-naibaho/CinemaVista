@@ -70,6 +70,7 @@ class NowPlayingFragment : Fragment() {
                     object: PopUpDialogListener{
                         override fun onClickListener() {
                             this@NowPlayingFragment.requireActivity().recreate()
+                            this@NowPlayingFragment.requireActivity().closeOptionsMenu()
                         }
                     }
                 )

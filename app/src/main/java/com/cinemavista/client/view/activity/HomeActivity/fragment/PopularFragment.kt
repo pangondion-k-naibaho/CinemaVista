@@ -71,6 +71,7 @@ class PopularFragment : Fragment() {
                     object: PopUpDialogListener {
                         override fun onClickListener() {
                             this@PopularFragment.requireActivity().recreate()
+                            this@PopularFragment.requireActivity().closeOptionsMenu()
                         }
                     }
                 )

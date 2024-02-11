@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"
         android:fontFamily="@font/oswald_variablefont_wght"
         android:textSize="18sp"
         android:text="@string/tvTitle_popular"/>

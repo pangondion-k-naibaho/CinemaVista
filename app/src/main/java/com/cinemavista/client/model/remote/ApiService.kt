@@ -1,10 +1,14 @@
 package com.cinemavista.client.model.remote
 
 import com.cinemavista.client.model.Constants
+import com.cinemavista.client.model.Constants.LANGUAGE.Companion.EN_US
 import com.cinemavista.client.model.data_class.response.MovieCollection
+import com.cinemavista.client.model.data_class.response.MovieReviewCollection
+import com.cinemavista.client.model.data_class.response.MovieVideoCollection
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Path
 import retrofit2.http.Query
 import retrofit2.http.QueryMap
 import java.util.Date
@@ -46,7 +50,7 @@ interface ApiService {
         @Query("certification_country") certificationCountry: String?= null,
         @Query("include_adult") includeAdult: Boolean = false,
         @Query("include_video") includeVideo: Boolean = false,
-        @Query("language") language: String = "en-US",
+        @Query("language") language: String = EN_US,
         @Query("page") page: Int?,
         @Query("primary_release_year") primaryReleaseYear: Int? = null,
         @Query("primary_release_date.gte") primaryReleaseDateGte: Date?= null,
@@ -79,4 +83,17 @@ interface ApiService {
         @Query("without_watch_providers") withoutWatchProviders: String?= null,
         @Query("year") year: Int?= null
     ): Call<MovieCollection>
+
+    @GET("movie/{movie_id}/videos")
+    fun getMovieVideoCollection(
+        @Path("movie_id") id: Long,
+        @Query("language") language: String = EN_US
+    ): Call<MovieVideoCollection>
+
+    @GET("movie/{movie_id}/reviews")
+    fun getMovieReviewCollection(
+        @Path("movie_id") id: Long,
+        @Query("language") language: String = EN_US,
+        @Query("page") page: Int
+    ): Call<MovieReviewCollection>
 }

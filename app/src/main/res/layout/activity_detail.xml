@@ -6,4 +6,277 @@
     android:layout_height="match_parent"
     tools:context=".view.activity.DetailActivity.DetailActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/detailToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/dark_eclipse"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/tvToolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:fontFamily="@font/roboto_regular"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:id="@+id/svDetail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailToolbar"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clDetail1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/pbDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:indeterminateTint="@color/dark_eclipse"
+                android:visibility="gone"
+                tools:visibility="visible"/>
+
+            <ImageView
+                android:id="@+id/ivPosterMovie"
+                android:layout_width="200dp"
+                android:layout_height="300dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/tvMovieTitle"/>
+
+            <TextView
+                android:id="@+id/tvMovieTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivPosterMovie"
+                android:layout_marginTop="5dp"
+                android:textSize="20sp"
+                android:fontFamily="@font/roboto_bold"
+                android:textColor="@color/black"
+                android:text="@string/tvDummyMovieName"/>
+
+            <TextView
+                android:id="@+id/tvMovieOriginalTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvMovieTitle"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:fontFamily="@font/roboto_medium"
+                android:textSize="18sp"
+                android:textColor="@color/grey"
+                android:text="@string/tvDummyMovieOriginalName"/>
+
+            <TextView
+                android:id="@+id/tvAddInfTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvMovieOriginalTitle"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textColor="@color/grey"
+                android:fontFamily="@font/oswald_variablefont_wght"
+                android:text="@string/tvTitle_AddInf"/>
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                app:layout_constraintStart_toEndOf="@id/tvAddInfTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvAddInfTitle"
+                app:layout_constraintBottom_toBottomOf="@+id/tvAddInfTitle"
+                android:background="@color/dark_eclipse"
+                android:layout_marginStart="5dp"/>
+
+            <TextView
+                android:id="@+id/tvAdult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvAddInfTitle"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/grey"
+                android:textSize="15sp"
+                android:text="@string/tvDetail_FamilyFriendly"
+                android:gravity="center"
+                android:drawablePadding="10dp"
+                app:drawableLeftCompat="@drawable/ic_family_green"/>
+
+            <TextView
+                android:id="@+id/tvReleaseDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvAdult"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/grey"
+                android:textSize="15sp"
+                android:text="@string/tvDummyReleaseDate"
+                android:gravity="center"
+                android:drawablePadding="10dp"
+                app:drawableLeftCompat="@drawable/ic_calendar_grey"/>
+
+            <TextView
+                android:id="@+id/tvGenre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvReleaseDate"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/grey"
+                android:textSize="15sp"
+                android:text="@string/tvDummyGenre"
+                android:gravity="center"
+                android:drawablePadding="10dp"
+                app:drawableLeftCompat="@drawable/ic_class_grey"/>
+
+            <TextView
+                android:id="@+id/tvOverviewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvGenre"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textColor="@color/grey"
+                android:fontFamily="@font/oswald_variablefont_wght"
+                android:text="@string/tvTitle_Overview"/>
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                app:layout_constraintStart_toEndOf="@id/tvOverviewTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvOverviewTitle"
+                app:layout_constraintBottom_toBottomOf="@+id/tvOverviewTitle"
+                android:background="@color/dark_eclipse"
+                android:layout_marginStart="5dp"/>
+
+            <TextView
+                android:id="@+id/tvOverviewMovie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvOverviewTitle"
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/grey"
+                android:text="@string/tvDummyOverview"
+                android:textAlignment="textStart"/>
+
+            <TextView
+                android:id="@+id/tvVideoTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvOverviewMovie"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textColor="@color/grey"
+                android:fontFamily="@font/oswald_variablefont_wght"
+                android:text="@string/tvTitle_VideoTrailer"/>
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                app:layout_constraintStart_toEndOf="@id/tvVideoTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvVideoTitle"
+                app:layout_constraintBottom_toBottomOf="@+id/tvVideoTitle"
+                android:background="@color/dark_eclipse"
+                android:layout_marginStart="5dp"/>
+
+            <ImageView
+                android:id="@+id/ivMovieBackdrop"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvVideoTitle"
+                android:layout_marginTop="10dp"/>
+
+            <ImageView
+                android:id="@+id/ivPlayMovieTrailer"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                app:layout_constraintStart_toStartOf="@id/ivMovieBackdrop"
+                app:layout_constraintEnd_toEndOf="@id/ivMovieBackdrop"
+                app:layout_constraintTop_toTopOf="@id/ivMovieBackdrop"
+                app:layout_constraintBottom_toBottomOf="@id/ivMovieBackdrop"
+                android:src="@drawable/ic_play_white"/>
+
+            <TextView
+                android:id="@+id/tvUserReviewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivMovieBackdrop"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textColor="@color/grey"
+                android:fontFamily="@font/oswald_variablefont_wght"
+                android:text="@string/tvTitle_UserReview"/>
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                app:layout_constraintStart_toEndOf="@id/tvUserReviewTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvUserReviewTitle"
+                app:layout_constraintBottom_toBottomOf="@+id/tvUserReviewTitle"
+                android:background="@color/dark_eclipse"
+                android:layout_marginStart="5dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMovieUserReview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvUserReviewTitle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:overScrollMode="never"
+                tools:listitem="@layout/item_user_review_layout"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

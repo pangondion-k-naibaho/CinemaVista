@@ -10,12 +10,25 @@
     <string name="tvDummyMovieName">Dummy Movie Name</string>
     <string name="tvDummyMovieOriginalName">(Dummy Movie Original Name)</string>
     <string name="tvDummyRating">x / 10</string>
+    <string name="tvDummyReleaseDate">18 August 2024</string>
+    <string name="tvDummyGenre">Action, Comedy</string>
+    <string name="tvDummyOverview">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et egestas quis ipsum suspendisse. Sed cras ornare arcu dui vivamus arcu felis bibendum ut.</string>
     <string name="tvTitle_nowplaying">Now Playing</string>
     <string name="tvTitle_popular">Popular</string>
     <string name="tvTitle_toprated">Top Rated</string>
     <string name="tvTitle_upcoming">Upcoming</string>
     <string name="tvTitle_discover">Discover Movie</string>
+    <string name="tvTitle_detailMovie">Detail Movie</string>
     <string name="btnTxt_Discover">Discover Based on Genre</string>
     <string name="btnTxt_popup">Retry</string>
     <string name="tvPopUpDescription">Oops! Something went wrong.\nPlease try again</string>
+    <string name="tvTitle_AddInf">Additional Information</string>
+    <string name="tvTitle_Overview">Overview</string>
+    <string name="tvTitle_VideoTrailer">Trailer Video</string>
+    <string name="tvTitle_UserReview">User Review</string>
+    <string name="tvDetail_FamilyFriendly">Family Friendly</string>
+    <string name="tvDetail_NotAdultContent">Not Contain Adult Contents</string>
+    <string name="tvDetail_AdultContent">Contain Adult Contents</string>
+    <string name="tvDummyUsername">Dummy Username</string>
+    <string name="tvDummyRatenYear">Dummy Rate - Dummy Year</string>
 </resources>
