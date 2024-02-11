@@ -4,13 +4,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.cinemavista.client.model.data_class.request.DiscoverMovie
 import com.cinemavista.client.model.data_class.response.MovieCollection
-import com.cinemavista.client.model.data_class.response.MovieInformation
 import com.cinemavista.client.model.remote.ApiConfig
-import com.cinemavista.client.view.activity.HomeActivity.HomeCommunicator
 import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.Response
 
 class HomeViewModel: ViewModel() {

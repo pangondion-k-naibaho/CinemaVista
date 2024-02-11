@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.cinemavista.client.model.data_class.response.MovieReviewCollection
 import com.cinemavista.client.model.data_class.response.MovieVideoCollection
-import com.cinemavista.client.model.data_class.response.MovieVideoInformation
 import com.cinemavista.client.model.remote.ApiConfig
 import retrofit2.Call
 import retrofit2.Response

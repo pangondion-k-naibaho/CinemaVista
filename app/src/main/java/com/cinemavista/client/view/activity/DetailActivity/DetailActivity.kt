@@ -71,14 +71,10 @@ class DetailActivity : AppCompatActivity() {
 
             when(retrievedMovieInformation.adult){
                 true ->{
-//                    tvAdult.setCompoundDrawables(AppCompatResources.getDrawable(this@DetailActivity, R.drawable.ic_adult_red), null, null, null)
-//                    tvAdult.setCompoundDrawables(getDrawable(R.drawable.ic_adult_red), null, null, null)
                     tvAdult.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_adult_red, 0, 0, 0)
                     tvAdult.text = getString(R.string.tvDetail_AdultContent)
                 }
                 false ->{
-//                    tvAdult.setCompoundDrawables(AppCompatResources.getDrawable(this@DetailActivity, R.drawable.ic_family_green), null, null, null)
-//                    tvAdult.setCompoundDrawables(getDrawable(R.drawable.ic_family_green), null, null, null)
                     tvAdult.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_family_yellow, 0, 0, 0)
                     tvAdult.text = getString(R.string.tvDetail_NotAdultContent)
                 }
@@ -176,7 +172,7 @@ class DetailActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                onBackPressed() // This will simulate the back button press
+                onBackPressed()
                 return true
             }
         }
